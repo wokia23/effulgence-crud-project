@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+  namespace: default
+spec:
+  # ingressClassName is required for the v1 API.
+  # Replace 'nginx' with the name of your Ingress controller.
+  ingressClassName: nginx 
+  rules:
+  - host: mtnelite1.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix # It's best practice to specify pathType
+        backend:
+          service:
+            name: mongo-express-service
+            port:
+              number: 8081
